@@ -9,3 +9,46 @@ Linux version 4.4.0-63-generic (buildd@lcy01-31) (gcc version 5.4.0 20160609 (Ub
 # uname -a
 Linux ubuntu 4.4.0-63-generic #84-Ubuntu SMP Wed Feb 1 17:20:32 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
 
+2. View the virtual memory status
+# cat /proc/meminfo
+MemTotal:      2055276 kB
+MemFree:        330940 kB
+Buffers:         85368 kB
+Cached:        1376288 kB
+SwapCached:          0 kB
+Active:         376712 kB
+Inactive:      1255044 kB
+HighTotal:           0 kB
+HighFree:            0 kB
+LowTotal:      2055276 kB
+LowFree:        330940 kB
+SwapTotal:     2064344 kB
+SwapFree:      2064344 kB
+Dirty:             308 kB
+Writeback:           0 kB
+AnonPages:      170116 kB
+Mapped:         262380 kB
+Slab:            40572 kB
+PageTables:      24604 kB
+NFS_Unstable:        0 kB
+Bounce:              0 kB
+CommitLimit:   3091980 kB
+Committed_AS:  3310252 kB
+VmallocTotal: 34359738367 kB
+VmallocUsed:    265636 kB
+VmallocChunk: 34359472711 kB
+HugePages_Total:     0
+HugePages_Free:      0
+HugePages_Rsvd:      0
+Hugepagesize:     2048 kB
+
+3. View the current shared memory page
+# ipcs -m
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0xb924ae74 425993     db2nc     767        40193248   7                       
+0x150200cd 622607     ncdev     600        210408     0                       
+0x00000000 655376     ncdev     701        131072     1                       
+
+4.
+

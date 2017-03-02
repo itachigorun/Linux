@@ -57,3 +57,18 @@ root         1  0.0  0.0  10348   696 ?        Ss   08:47   0:00 init [5]
 ncdev     7177  0.0  0.0  65572   956 pts/1    R+   09:24   0:00 ps -aux
 
 ----S:sleep  SW:sleep+wait  R:running
+
+5. Hard links are additional pointers to an inode, so you can modify the file name, Symbolic links link to a path name, you can't change the file name.They all have the same data.
+
+6. View the file information
+# stat db2nc
+  File: `db2nc'
+  Size: 4096            Blocks: 8          IO Block: 4096   directory
+Device: 802h/2050d      Inode: 14779755    Links: 11
+Access: (0755/drwxr-xr-x)  Uid: (  507/   db2nc)   Gid: (  501/db2iadml)
+Access: 2017-03-02 22:59:10.000000000 +0800
+Modify: 2017-03-02 15:13:15.000000000 +0800
+Change: 2017-03-02 15:13:15.000000000 +0800
+
+7. less list the file data
+#less filename 

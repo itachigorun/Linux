@@ -96,7 +96,12 @@ root     :0       -                19:00   ?xdm?  16.31s  0.08s /usr/bin/gnome-s
 root     pts/1    :0.0             19:31    0.00s  0.01s  0.00s w
 root     pts/2    192.168.0.102    19:35    0.00s  0.02s  0.00s vi catalina.sh
 
-11. view the code
+11.
+View the current character set
+# echo $LANG
+zh_CN.UTF-8
+
+The default character set used by the system
 # locale
 LANG=zh_CN.UTF-8
 LC_CTYPE="zh_CN.UTF-8"
@@ -113,3 +118,29 @@ LC_MEASUREMENT="zh_CN.UTF-8"
 LC_IDENTIFICATION="zh_CN.UTF-8"
 LC_ALL=
 
+What languages and character sets are supported by the Linux system
+# locale -a
+..........
+zh_CN
+zh_CN.gb18030
+zh_CN.gb2312
+zh_CN.gbk
+zh_CN.utf8
+zh_HK
+zh_HK.big5hkscs
+zh_HK.utf8
+zh_SG
+zh_SG.gb2312
+zh_SG.gbk
+zh_SG.utf8
+zh_TW
+zh_TW.big5
+zh_TW.euctw
+zh_TW.utf8
+...........
+
+Permanent entry into force
+# cat /etc/sysconfig/i18n   
+LANG="zh_CN.UTF-8" 
+
+# cat /etc/profile 

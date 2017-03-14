@@ -96,8 +96,7 @@ root     :0       -                19:00   ?xdm?  16.31s  0.08s /usr/bin/gnome-s
 root     pts/1    :0.0             19:31    0.00s  0.01s  0.00s w
 root     pts/2    192.168.0.102    19:35    0.00s  0.02s  0.00s vi catalina.sh
 
-11.
-View the current character set
+11.View the current character set
 # echo $LANG
 zh_CN.UTF-8
 
@@ -144,3 +143,6 @@ Permanent entry into force
 LANG="zh_CN.UTF-8" 
 
 # cat /etc/profile 
+
+12. Run a Command or Shell-Script Even after You Logout
+# nohup ./start.sh >output.txt 2>&1 &

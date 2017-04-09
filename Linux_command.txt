@@ -1,6 +1,7 @@
 /* Linux common commands */
 /* itachigorun 2017-02-16 */
 
+
 1. version query
 # cat /proc/version
 Linux version 4.4.0-63-generic (buildd@lcy01-31) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4) ) #84-Ubuntu SMP Wed Feb 1 17:20:32 UTC 2017

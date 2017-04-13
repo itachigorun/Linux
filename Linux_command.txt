@@ -147,3 +147,17 @@ LANG="zh_CN.UTF-8"
 
 12. Run a Command or Shell-Script Even after You Logout
 # nohup ./start.sh >output.txt 2>&1 &
+2>&1 : STDOUT and STDERR all export to the output.txt
+
+13. whatis
+whatis shows description for user commands, system calls, library functions, and others in manual pages
+$ whatis bash
+bash (1) -GNU Bourne -Again Shell
+
+14. whereis
+whereis searches for executables, cource files, and manual pages using a database built by system automatically.
+$ whereis bash
+bash: /usr/bin/bash /usr/share/man/man1/bash.1.gz
+
+15.which
+which searches for executables in the directories specified by the environment

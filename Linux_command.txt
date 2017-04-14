@@ -160,4 +160,61 @@ $ whereis bash
 bash: /usr/bin/bash /usr/share/man/man1/bash.1.gz
 
 15.which
-which searches for executables in the directories specified by the environment
+which searches for executables in the directories specified by the environment variable PATH.
+
+16.cat
+Display text files on screen
+Copy text files
+Combine text files
+Create new text files
+
+$ cat filename
+$ cat file1 file2
+$ cat file1 file2 > newcombinedfile
+$ cat < file1 > file2 #copy file1 to file2
+
+17.diff
+Compares files, and lists their differences.
+
+18.file
+Determine file type 
+$file filename
+Example:
+$ file index.html
+index.html: HTML document, ASCII text
+
+19.zip or unzip 
+.tar:
+    zip  :  tar zcvf filename.tar filename
+    unzip:  tar zxvf filename.tar
+.gz:
+    zip  :  gzip filename
+    unzip:  1. gunzip filename.gz 
+            2. gunzip -d filename.gz
+.tar.gz .tgz:
+    zip  :  tar zcvf filename.tar.gz filename
+    unzip:  tar zxvf filename.tar.gz
+bz2:
+    zip  :  bzip2 -z filename
+    unzip:  bzip2 -d filename.bz2
+            bunzip2 filename.bz2
+.tar.bz              
+    zip  :  tar jcvf filename.tar.bz filename
+    unzip:  tar jxvf filename.tar.bz 
+.tar.bz2              
+    zip  :  tar jcvf filename.tar.bz2 filename
+    unzip:  tar jxvf filename.tar.bz2 
+.z 
+    zip  :  compress filename
+    unzip:  uncompress filename.z
+.tar.z 
+    zip  :  tar zcvf filename.tar.z filename
+    unzip:  tar zxvf filename.tar.z 
+.zip
+    zip  :  zip filename.zip filename
+    unzip:  unzip filename.zip 
+  
+20.head 
+Outputs the first 10 lines of file 
+
+21.

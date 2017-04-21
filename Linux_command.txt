@@ -71,8 +71,12 @@ Access: 2017-03-02 22:59:10.000000000 +0800
 Modify: 2017-03-02 15:13:15.000000000 +0800
 Change: 2017-03-02 15:13:15.000000000 +0800
 
-7. less list the file data
-#less filename 
+7. find
+Find files in directory
+find directory options pattern
+Example:
+$ find . -name README.md 
+$ find /home/usr -name '*.txt'
 
 8. ls command
 # ls -ailF
@@ -174,6 +178,7 @@ $ cat file1 file2 > newcombinedfile
 $ cat < file1 > file2 #copy file1 to file2
 
 17.diff
+$ diff filename1 filename2
 Compares files, and lists their differences.
 
 18.file
@@ -214,7 +219,9 @@ bz2:
     zip  :  zip filename.zip filename
     unzip:  unzip filename.zip 
   
-20.head 
-Outputs the first 10 lines of file 
+20.head/tail 
+Outputs the first/last 10 lines of file 
 
-21. sed 
+21. more/less   
+just use less and forget about more 
+Shows the first part of a file(move with space and type q to quit)

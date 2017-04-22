@@ -225,3 +225,114 @@ Outputs the first/last 10 lines of file
 21. more/less   
 just use less and forget about more 
 Shows the first part of a file(move with space and type q to quit)
+
+22. cut 
+To divide a file into several parts(columns)
+cut [OPTION] ... [FILE] ...
+Example:
+$ cat exp.txt
+1;2;3;4;5;6;7
+To parse out column 2 from a semicolon(;) delimited file:
+$ cat exp.txt | cut -d \; -f 2 > output.txt
+$ cat output.txt
+2
+
+Example2:
+$ cat exp2.txt
+red riding hood went to the park to play
+$ cout -d " " -f 2,7,9 exp2.txt
+riding park play
+
+23. egrep 'xxxxxx' example.txt == grep -E 'xxxxxx' example.txt 
+    fgrep 'xxx' exmple.txt == grep -F 'xxx' example.txt 
+
+egrep : print lines matching a pattern - Extended Expression, Regular expression
+fgrep : print lines matching a pattern - FIXED pattern matching, find the exact string in example.txt 
+
+24. nl 
+Number lines of files  
+$ nl example.txt 
+
+25. sed 
+Stream editor for filtering and transforming text
+example.txt: Hello This is a Test 1 2 3 4
+replace all spaces with hyphens
+$ sed 's/ /-/g' example.txt
+Hello-This-is-a-Test-1-2-3-4
+
+replace all digits with "d"
+$ sed 's/[0-9]/d/g' example.txt
+Hello This is a Test d d d d
+
+26. sort 
+Sort lines of text files 
+$ sort example.txt
+
+27.  tr 
+Translate or delete characters
+example.txt:
+Hello World Foo Bar Baz!
+
+take all lower case letters and make them upper case
+$ cat example.txt | tr 'a-z' 'A-Z' 
+HELLO WORLD FOO BAR BAZ!
+
+take all spaces and make them into newlines
+$ cat example.txt | tr ' ' '\n'
+Hello
+World
+Foo
+Bar
+Baz!
+
+28. unip 
+Report or omit repeated lines
+example.txt :
+a
+a
+b
+a
+b
+c
+d
+c
+
+show only unique lines of example.txt (first you need to sort it, otherwise it won't see the overlap)
+$ sort example.txt | uniq
+a
+b
+c
+d
+
+show the unique items for each line, and tell me how many instances it found
+$ sort example.txt | uniq -c
+    3 a
+    2 b
+    2 c
+    1 d
+
+29. wc
+Tells you how many lines, words and characters there are in a file.
+wc filename
+Example:
+$ wc demo.txt
+7459   15915  398400 demo.txt
+Where 7459 is lines, 15915 is words and 398400 is characters.
+
+30. cal 
+Shows the month's calendar.
+accdev@acc:/app/accdev>cal
+     April 2017     
+Su Mo Tu We Th Fr Sa
+                   1
+ 2  3  4  5  6  7  8
+ 9 10 11 12 13 14 15
+16 17 18 19 20 21 22
+23 24 25 26 27 28 29
+30
+
+31. last 
+Lists your last logins of specified user.
+
+32. top
+Displays your currently active processes.

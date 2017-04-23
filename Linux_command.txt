@@ -336,3 +336,6 @@ Lists your last logins of specified user.
 
 32. top
 Displays your currently active processes.
+
+33. netstat
+netstat - Print network connections, routing tables, interface statistics, masquerade connections, and multimcast memberships

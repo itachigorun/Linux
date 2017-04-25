@@ -1,0 +1,72 @@
+telnet命令通常用来远程登录。telnet程序是基于TELNET协议的远程登录客户端程序。Telnet协议是TCP/IP协议族中的一员，是Internet远程登录服务的标准协议和主要方式。它为用户提供了在本地计算机上完成远程主机工作的能力。
+语法
+telnet [-8acdEfFKLrx][-b<主机别名>][-e<脱离字符>][-k<域名>][-l<用户名称>][-n<记录文件>][-S<服务类型>][-X<认证形态>][主机名称或IP地址<通信端口>] 
+参数
+-8 允许使用8位字符资料，包括输入与输出 -a 尝试自动登入远端系统 -b<主机别名> 使用别名指定远端主机名称 -c 不读取用户专属目录里的.telnetrc文件 -d 启动排错模式 -e<脱离字符> 设置脱离字符 -E 滤除脱离字符 -F 使用Kerberos V5认证时，加上此参数可把本地主机的认证数据上传到远端主机 -f 此参数的效果和”-F”参数相同 -k<域名> 使用Kerberos认证时，加上此参数让远端主机采用指定的领域名，而非该主机的域名 -K 不自动登入远端主机 -l<用户名称> 指定要登入远端主机的用户名称 -L 允许输出8位字符资料 -n<记录文件> 指定文件记录相关信息 -r 使用类似rlogin指令的用户界面 -S<服务类型> 设置telnet连线所需IP TOS信息 -x 假设主机有支持数据加密的功能，就使用它 -X<认证形态> 关闭指定的认证形态 
+使用示例
+示例1：远程服务器无法访问
+
+[root@linuxprobe ~]# telnet 192.168.120.209 Trying 192.168.120.209... telnet: connect to address 192.168.120.209: No route to host telnet: Unable to connect to remote host: No route to host 
+处理这种情况方法：
+（1）确认IP地址是否正确
+（2）确认IP地址对应的装机是否已经开机
+（3）如果主机已经启动，确认路由设置是否设置正确（使用route命令查看）
+（4）如果主机已经启动，确认主机上是否开启了telnet服务（使用netstat命令查看，TCP的23端口是否有LISTEN状态行）
+（5）如果主机已经启动telnet服务，确认防火墙是否开放了23端口的访问（使用iptables-save查看）
+
+示例2：域名无法解析
+
+[root@linuxprobe ~]# telnet www.baidu.com www.baidu.com/telnet: Temporary failure in name resolution 
+处理这种情况方法：
+（1）确认域名是否正确
+（2）确认本机的域名解析有关的设置是否正确(/etc/resolv.conf中nameserver的配置是否正确，如果没有，可以使用nameserver 8.8.8.8)
+（3）确认防火墙是否放开了UDP53端口的访问(DNS使用UDP协议，端口53，使用iptables-save查看)
+
+示例3：拒绝访问
+
+[root@linuxprobe ~]# telnet 192.168.120.206 Trying 192.168.120.206... telnet: connect to address 192.168.120.206: Connection refused telnet: Unable to connect to remote host: Connection refused 
+处理这种情况方法：
+（1）确认IP地址或者主机名是否正确
+（2）确认端口是否正确，是否默认23端口
+
+若要检查192.168.120.206的某端口是否能否能访问，如443端口，可使用如下命令
+
+[root@linuxprobe ~]# telnet 192.168.120.206 443 Trying 192.168.120.206... telnet: connect to address 192.168.120.206: Connection refused 
+说明：这表示192.168.120.206的443端口不能访问
+
+示例4：telnet root用户的登入
+
+[root@linuxprobe ~]# telnet 192.168.120.204 Trying 192.168.120.204... Connected to 192.168.120.204 (192.168.120.204). Escape character is '^]'. localhost (Linux release 2.6.18-274.18.1.el5 #1 SMP Thu Feb 9 12:45:44 EST 2012) (1) login: root Password: Login incorrect 
+说明：一般情况下不允许root从远程登录，可以先用普通账号登录，然后再su -切到root用户。若要允许root用户登入，可用下列方法：
+
+[root@linuxprobe ~]# vi /etc/pam.d/login #auth required pam_securetty.so #将这一行加上注释！ 或 [root@linuxprobe ~]# mv /etc/securetty /etc/securetty.bak 
+示例5：启用telnet服务
+
+[root@linuxprobe ~]# cd /etc/xinetd.d/ [root@linuxprobe xinetd.d]# ll 总计 124 -rw-r--r-- 1 root root 1157 2011-05-31 chargen-dgram -rw-r--r-- 1 root root 1159 2011-05-31 chargen-stream -rw-r--r-- 1 root root 523 2009-09-04 cvs -rw-r--r-- 1 root root 1157 2011-05-31 daytime-dgram -rw-r--r-- 1 root root 1159 2011-05-31 daytime-stream -rw-r--r-- 1 root root 1157 2011-05-31 discard-dgram -rw-r--r-- 1 root root 1159 2011-05-31 discard-stream -rw-r--r-- 1 root root 1148 2011-05-31 echo-dgram -rw-r--r-- 1 root root 1150 2011-05-31 echo-stream -rw-r--r-- 1 root root 323 2004-09-09 eklogin -rw-r--r-- 1 root root 347 2005-09-06 ekrb5-telnet -rw-r--r-- 1 root root 326 2004-09-09 gssftp -rw-r--r-- 1 root root 310 2004-09-09 klogin -rw-r--r-- 1 root root 323 2004-09-09 krb5-telnet -rw-r--r-- 1 root root 308 2004-09-09 kshell -rw-r--r-- 1 root root 317 2004-09-09 rsync -rw-r--r-- 1 root root 1212 2011-05-31 tcpmux-server -rw-r--r-- 1 root root 1149 2011-05-31 time-dgram -rw-r--r-- 1 root root 1150 2011-05-31 time-stream [root@linuxprobe xinetd.d]# cat krb5-telnet # default: off # description: The kerberized telnet server accepts normal telnet sessions, \ # but can also use Kerberos 5 authentication. service telnet { flags = REUSE socket_type = stream wait = no user = root server = /usr/kerberos/sbin/telnetd log_on_failure += USERID disable = yes } 
+配置参数通常如下：
+service telnet
+{
+disable = no #启用
+flags = REUSE #socket可重用
+socket_type = stream #连接方式为TCP
+wait = no #为每个请求启动一个进程
+user = root #启动服务的用户为root
+server = /usr/sbin/in.telnetd #要激活的进程
+log_on_failure += USERID #登录失败时记录登录用户名
+}
+如果要配置允许登录的客户端列表，加入
+only_from = 192.168.0.2 #只允许192.168.0.2登录
+如果要配置禁止登录的客户端列表，加入
+no_access = 192.168.0.{2,3,4} #禁止192.168.0.2、192.168.0.3、192.168.0.4登录
+如果要设置开放时段，加入
+access_times = 9:00-12:00 13:00-17:00 # 每天只有这两个时段开放服务（我们的上班时间：P）
+如果你有两个IP地址，一个是私网的IP地址如192.168.0.2，一个是公网的IP地址如218.75.74.83，如果你希望用户只能从私网来登录telnet服务，那么加入
+bind = 192.168.0.2
+各配置项具体的含义和语法可参考xined配置文件属性说明（man xinetd.conf）
+配置端口，修改services文件：
+# vi /etc/services
+找到以下两句
+telnet 23/tcp
+telnet 23/udp
+如 果前面有#字符，就去掉它。telnet的默认端口是23，这个端口也是黑客端口扫描的主要对象，因此最好将这个端口修改掉，修改的方法很简单，就是将 23这个数字修改掉，改成大一点的数字，比如61123。注意，1024以下的端口号是internet保留的端口号，因此最好不要用，还应该注意不要与 其它服务的端口冲突。
+启动服务：service xinetd restart

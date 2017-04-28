@@ -1,7 +1,7 @@
 https://linux.cn/article-2434-1.html
 
-1. �г���������
-��һ��Ҫ���ܵģ�����򵥵�����г����е�ǰ�����ӡ�ʹ�� -a ѡ��ɡ�
+1. 列出所有连接
+第一个要介绍的，是最简单的命令：列出所有当前的连接。使用 -a 选项即可
 
 $ netstat -a
  
@@ -30,10 +30,10 @@ Active UNIX domain sockets (servers and established)
 Proto RefCnt Flags       Type       State         I-Node   Path
 unix  2      [ ACC ]     STREAM     LISTENING     12403    @/tmp/dbus-IDgfj3UGXX
 unix  2      [ ACC ]     STREAM     LISTENING     40202    @/dbus-vfs-daemon/socket-6nUC6CCx
-���������г� tcp, udp �� unix Э���������׽��ֵ��������ӡ�Ȼ����Щ��Ϣ��������ϸ������Ա������Ҫ�鿴ĳ��Э���˿ڵľ������������
+上述命令列出 tcp, udp 和 unix 协议下所有套接字的所有连接。然而这些信息还不够详细，管理员往往需要查看某个协议或端口的具体连接情况。
 
-2. ֻ�г� TCP �� UDP Э�������
-ʹ�� -t ѡ���г� TCP Э������ӣ�
+2. 只列出 TCP 或 UDP 协议的连接
+使用 -t 选项列出 TCP 协议的连接：
 
 $ netstat -at
 Active Internet connections (servers and established)
@@ -44,7 +44,7 @@ tcp        0      0 enlightened.local:36310 del01s07-in-f24.1:https ESTABLISHED
 tcp        0      0 enlightened.local:45038 a96-17-181-10.depl:http ESTABLISHED
 tcp        0      0 enlightened.local:37892 ABTS-North-Static-:http ESTABLISHED
 .....
-ʹ�� -u ѡ���г� UDP Э������ӣ�
+使用 -u 选项列出 UDP 协议的连接：
 
 $ netstat -au
 Active Internet connections (servers and established)
@@ -58,10 +58,10 @@ udp        0      0 *:ntp                   *:*
 udp6       0      0 fe80::216:36ff:fef8:ntp [::]:*                             
 udp6       0      0 ip6-localhost:ntp       [::]:*                             
 udp6       0      0 [::]:ntp                [::]:*
-����ͬʱ��ʾ�� IPv4 �� IPv6 �����ӡ�
+上面同时显示了 IPv4 和 IPv6 的连接。
 
-3. ���÷��������������ӿ��ѯ�ٶ�
-Ĭ������� netstat ��ͨ����������������������ÿ�� IP ��ַ��Ӧ������������ή�Ͳ����ٶȡ��������� IP ��ַ�Ѿ��㹻����û�б�Ҫ֪������������ʹ�� -n ѡ����������������ܡ�
+3. 禁用反向域名解析，加快查询速度
+默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名。这会降低查找速度。如果你觉得 IP 地址已经足够，而没有必要知道主机名，就使用 -n 选项禁用域名解析功能。
 
 $ netstat -ant
 Active Internet connections (servers and established)
@@ -71,10 +71,10 @@ tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN
 tcp        0      0 192.168.1.2:49058       173.255.230.5:80        ESTABLISHED
 tcp        0      0 192.168.1.2:33324       173.194.36.117:443      ESTABLISHED
 tcp6       0      0 ::1:631                 :::*                    LISTEN
-���������г����� TCP Э������ӣ�û��ʹ����������������So easy ? �ǳ��á�
+上述命令列出所有 TCP 协议的连接，没有使用域名解析技术。So easy ? 非常好。
 
-4. ֻ�г������е�����
-�κ��������ĺ�̨���̶����һ���˿ڣ����ڼ��������������Щ���ڼ������׽���Ҳ�����ӵ��׽���һ����Ҳ�ܱ� netstat �г�����ʹ�� -l ѡ���г����ڼ������׽��֡�
+4. 只列出监听中的连接
+任何网络服务的后台进程都会打开一个端口，用于监听接入的请求。这些正在监听的套接字也和连接的套接字一样，也能被 netstat 列出来。使用 -l 选项列出正在监听的套接字。
 
 $ netstat -tnl
 Active Internet connections (only servers)
@@ -82,14 +82,14 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State
 tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN     
 tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN     
 tcp6       0      0 ::1:631                 :::*                    LISTEN
-�������ǿ��Կ������ڼ���״̬�� TCP �˿ں����ӡ������鿴���м����˿ڣ�ȥ�� -t ѡ������ֻ��鿴 UDP �˿ڣ�ʹ�� -u ѡ����� -t ѡ�
+现在我们可以看到处于监听状态的 TCP 端口和连接。如果你查看所有监听端口，去掉 -t 选项。如果你只想查看 UDP 端口，使用 -u 选项，代替 -t 选项。
 
-ע�⣺��Ҫʹ�� -a ѡ����� netstat ���г��������ӣ����������Ǽ����˿ڡ�
+注意：不要使用 -a 选项，否则 netstat 会列出所有连接，而不仅仅是监听端口。
 
-5. ��ȡ�����������̺��Լ��û� ID
-�鿴�˿ں����ӵ���Ϣʱ���ܲ鿴�����Ƕ�Ӧ�Ľ������ͽ��̺Ŷ�ϵͳ����Ա��˵�Ƿǳ��а����ġ��ٸ����ӣ�Apache �� httpd ������80�˿ڣ������Ҫ�鿴 http �����Ƿ��Ѿ����������� http �������� apache ���� nginx �����ģ���ʱ������Կ�����������
+5. 获取进程名、进程号以及用户 ID
+查看端口和连接的信息时，能查看到它们对应的进程名和进程号对系统管理员来说是非常有帮助的。举个栗子，Apache 的 httpd 服务开启80端口，如果你要查看 http 服务是否已经启动，或者 http 服务是由 apache 还是 nginx 启动的，这时候你可以看看进程名。
 
-ʹ�� -p ѡ��鿴������Ϣ��
+使用 -p 选项查看进程信息。
 
 ~$ sudo netstat -nlpt
 Active Internet connections (only servers)
@@ -97,9 +97,9 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State       
 tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      1144/dnsmasq    
 tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      661/cupsd       
 tcp6       0      0 ::1:631                 :::*                    LISTEN      661/cupsd
-ʹ�� -p ѡ��ʱ��netstat ���������� root Ȩ��֮�£���Ȼ���Ͳ��ܵõ������� root Ȩ���µĽ����������ܶ������� http �� ftp �������� root Ȩ��֮�¡�
+使用 -p 选项时，netstat 必须运行在 root 权限之下，不然它就不能得到运行在 root 权限下的进程名，而很多服务包括 http 和 ftp 都运行在 root 权限之下。
 
-��Ƚ������ͽ��̺Ŷ��ԣ��鿴���̵�ӵ���߻�����á�ʹ�� -ep ѡ�����ͬʱ�鿴���������û�����
+相比进程名和进程号而言，查看进程的拥有者会更有用。使用 -ep 选项可以同时查看进程名和用户名。
 
 $ sudo netstat -ltpe
 Active Internet connections (only servers)
@@ -107,16 +107,16 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State       
 tcp        0      0 enlightened:domain      *:*                     LISTEN      root       11090       1144/dnsmasq    
 tcp        0      0 localhost:ipp           *:*                     LISTEN      root       9755        661/cupsd       
 tcp6       0      0 ip6-localhost:ipp       [::]:*                  LISTEN      root       9754        661/cupsd
-�����г� TCP Э���µļ����׽��֣�ͬʱ��ʾ������Ϣ��һЩ������Ϣ��
+上面列出 TCP 协议下的监听套接字，同时显示进程信息和一些额外信息。
 
-��Щ�������Ϣ�����û����ͽ��̵������ڵ�š���������������˵�����á�
+这些额外的信息包括用户名和进程的索引节点号。这个命令对网管来说很有用。
 
-ע�� - �����㽫 -n �� -e ѡ��һ��ʹ�ã�User �е����Ծ����û��� ID �ţ��������û�����
+注意 - 假如你将 -n 和 -e 选项一起使用，User 列的属性就是用户的 ID 号，而不是用户名。
 
-6. ��ӡͳ������
-netstat ���Դ�ӡ������ͳ�����ݣ�����ĳ��Э���µ��շ���������
+6. 打印统计数据
+netstat 可以打印出网络统计数据，包括某个协议下的收发包数量。
 
-�����г������������ͳ�������
+下面列出所有网络包的统计情况：
 
 $ netstat -s
 Ip:
@@ -136,25 +136,25 @@ Icmp:
     ICMP output histogram:
         destination unreachable: 125
 ... OUTPUT TRUNCATED ...
-�����ֻ��ӡ�� TCP �� UDP Э���ͳ�����ݣ�ֻҪ���϶�Ӧ��ѡ�-t �� -u�����ɣ�so easy��
+如果想只打印出 TCP 或 UDP 协议的统计数据，只要加上对应的选项（-t 和 -u）即可，so easy。
 
-7. ��ʾ�ں�·����Ϣ
-ʹ�� -r ѡ���ӡ�ں�·����Ϣ����ӡ��������Ϣ�� route �����������Ϣһ��������Ҳ����ʹ�� -n ѡ���ֹ����������
+7. 显示内核路由信息
+使用 -r 选项打印内核路由信息。打印出来的信息与 route 命令输出的信息一样。我们也可以使用 -n 选项禁止域名解析。
 
 $ netstat -rn
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 0.0.0.0         192.168.1.1     0.0.0.0         UG        0 0          0 eth0
 192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 eth0
-8. ��ӡ����ӿ�
-netstat Ҳ�ܴ�ӡ����ӿ���Ϣ��-i ѡ�����Ϊ������ܶ�����
+8. 打印网络接口
+netstat 也能打印网络接口信息，-i 选项就是为这个功能而生。
 
 $ netstat -i
 Kernel Interface table
 Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
 eth0       1500 0     31611      0      0 0         27503      0      0      0 BMRU
 lo        65536 0      2913      0      0 0          2913      0      0      0 LRU
-�����������Ϣ�Ƚ�ԭʼ�����ǽ� -e ѡ��� -i ѡ�����ʹ�ã���������û��Ѻõ���Ϣ��
+上面输出的信息比较原始。我们将 -e 选项和 -i 选项搭配使用，可以输出用户友好的信息。
 
 $ netstat -ie
 Kernel Interface table
@@ -176,16 +176,16 @@ lo        Link encap:Local Loopback
           TX packets:2921 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:0 
           RX bytes:305297 (305.2 KB)  TX bytes:305297 (305.2 KB)
-����������Ϣ�� ifconfig �������Ϣһ����
+上面的输出信息与 ifconfig 输出的信息一样。
 
-9. netstat �������
-���ǿ���ʹ�� netstat �� -c ѡ����������Ϣ��
+9. netstat 持续输出
+我们可以使用 netstat 的 -c 选项持续输出信息。
 
 $ netstat -ct
-�������ɳ������ TCP Э����Ϣ��
+这个命令可持续输出 TCP 协议信息。
 
-10. ��ʾ�ಥ����Ϣ
-ѡ�� -g ����� IPv4 �� IPv6 �Ķಥ����Ϣ��
+10. 显示多播组信息
+选项 -g 会输出 IPv4 和 IPv6 的多播组信息。
 
 $ netstat -g
 IPv6/IPv4 Group Memberships

@@ -342,3 +342,6 @@ Displays your currently active processes.
 
 33. netstat
 netstat - Print network connections, routing tables, interface statistics, masquerade connections, and multimcast memberships
+
+34. view the binary file
+$ xxd filename

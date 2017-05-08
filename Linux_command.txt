@@ -319,6 +319,9 @@ $ wc demo.txt
 7459   15915  398400 demo.txt
 Where 7459 is lines, 15915 is words and 398400 is characters.
 
+list file's number
+$ls | wc -w 
+
 30. cal 
 Shows the month's calendar.
 accdev@acc:/app/accdev>cal

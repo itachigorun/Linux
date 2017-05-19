@@ -148,6 +148,7 @@ Permanent entry into force
 LANG="zh_CN.UTF-8" 
 
 # cat /etc/profile 
+#export LANG=zh_CN.UTF-8
 
 12. Run a Command or Shell-Script Even after You Logout
 # nohup ./start.sh >output.txt 2>&1 &

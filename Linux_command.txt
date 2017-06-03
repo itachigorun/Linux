@@ -346,3 +346,21 @@ netstat - Print network connections, routing tables, interface statistics, masqu
 
 34. view the binary file
 $ xxd filename
+
+35. 查看端口号/进程号
+
+$ ps -ef | grep 进程名
+
+$ sudo netstat -anp | grep <端口号/进程名>
+
+Linux下查看端口号所使用的进程号：
+使用lsof命令： lsof –i:端口号
+
+显示指定用户信息
+$ ps -u root
+ 
+显示所有进程信息，连同命令行
+$ ps -ef 
+
+列出目前所有的正在内存中的程序
+$ ps -aux

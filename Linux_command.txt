@@ -366,4 +366,64 @@ $ ps -ef
 $ ps -aux
 
 
-36. nload
+36. 
+nethogs: 按进程查看流量占用
+iptraf: 按连接/端口查看流量
+ifstat: 按设备查看流量
+ethtool: 诊断工具
+tcpdump: 抓包工具
+ss: 连接查看工具
+其他: dstat, slurm, nload, bmon, atop, iftop, nmon, collectl
+
+dstat -nf
+iotop
+sar -n DEV 1 4
+sar -n tcp,etcp 1
+ifconfig
+vnstat
+ifstat
+jnettop
+bwm-ng
+htop
+slurm
+tcptrack
+cbm
+pkstat
+netwatch
+trafshow
+netload
+dstat
+
+
+监控总体带宽使用――nload、bmon、slurm、bwm-ng、cbm、speedometer和netload
+监控总体带宽使用（批量式输出）――vnstat、ifstat、dstat和collectl
+每个套接字连接的带宽使用――iftop、iptraf、tcptrack、pktstat、netwatch和trafshow
+每个进程的带宽使用――nethogs
+
+ngrep
+
+
+37. vmstat --虚拟内存统计
+vmstat 命令是用于显示虚拟内存、内核线程、磁盘、系统进程、I/O 模块、中断、CPU 活跃状态等更多信息。
+$ vmstat
+
+38. lsof   --打开文件列表
+lsof 命令对于很多 Linux/Unix 系统都可以使用，主要以列表的形式显示打开的文件和进程。
+打开的文件主要包括磁盘文件、网络套接字、管道、设备和进程。使用这个命令的主要原因是一个一个盘不能卸载并且显示文件正在使用或者打开的错误信息。
+这个命令很容易看出哪些文件正在使用。这个命令最常用的格式：
+
+$ lsof
+
+39. tcpdump 网络数据包分析器
+tcpdump 是一种使用最广泛的命令行网络数据包分析器或数据包嗅探程序，主要用于捕获和过滤 TCP/IP 包收到或者转移在一个网络的特定借口信息。
+它也提供了一个选项参数去保存将捕获的包在一个文件中用于以后分析使用，tcpdump 几乎在所有的 Linux 版本中都是可用的。
+
+$ tcpdump -i eth0
+
+40. iotop --监控linux磁盘I/O
+iotop也是和top命令相似，但是它会有一个报告功能去监控和显示实时的磁盘 I/O 输入和输出和程序进程。这个工具对于查找精确的高的磁盘读/写过程是非常有用的。
+$ sudo iotop
+
+41. iostat --输入/输出统计
+iostat 是收集和展示系统输入和输出存储设备统计的简单工具。这个工具通常用于查找存储设备性能问题，包括设备、本地磁盘、例如 NFS 远程磁盘。
+$ iostat

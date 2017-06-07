@@ -1,0 +1,83 @@
+#!/bin/csh
+#it is a shell script which provides function of auto backup and delete logfiles regularly
+#by fuxueli
+
+set despath=/opt/BOCO.DAL/AFM_LOG
+
+###########查找一天前的目录并压缩，删除源文件############
+
+set dir=`find $despath/ -maxdepth 1 -type d -ctime +1 | grep -v .gz`
+foreach i($dir)
+    tar zcvf $i.tar.gz $i --remove-files
+  end 
+
+##############删除三天前的文件##########################
+
+find $despath/ -ctime +3 -exec rm -rf {} \;
+
+完成后添加到crontab中自动执行即可。
+
+
+----------------------------------------------------------------------------
+
+#!/bin/bash  
+FTPHOST="1.1.1.7" 
+USERNAME="lislog" 
+PASSWORD="lislog" 
+ 
+#取前一天年月日  
+y=`date --date='1 days ago' "+%Y"`   
+m=`date --date='1 days ago' "+%m"`   
+d=`date --date='1 days ago' "+%d"`     
+ 
+#取当天年月日  
+yt=`date "+%Y"`  
+mt=`date "+%m"`  
+dt=`date "+%d"`  
+ 
+#以当天日期为压缩文件名  
+y1=`date "+%Y"`  
+m1=`date "+%m"`  
+d1=`date "+%d"`    
+ 
+#文件名信息  
+SRCFILE="lis42.log.$y-$m-$d*   lis42.log.$yt-$mt-$dt*   lis42.log" 
+DESFILE="lis42_$y1-$m1-$d1.zip" 
+ 
+#需要备份文件的目录  
+FILEPATH="/home/lislog" 
+ 
+# FTP Server备份目录  
+# BACKUPDIR="lislog" 
+ 
+#压缩处理  
+cd  $FILEPATH  
+zip $DESFILE  $SRCFILE  
+ 
+#登入FTP Server并传送档案  
+ftp -v -n $FTPHOST << END 
+user $USERNAME $PASSWORD 
+binary 
+put  $DESFILE  
+bye  
+END 
+ 
+#删除临时压缩文件  
+cd  $FILEPATH  
+rm -f $DESFILE  
+ 
+#end 
+
+
+---------------------------------------------------------------
+
+#!/bin/sh
+#gztest项目的日志压缩程序
+cd /var/www/gztest/Temp/log && rm -rf ./*.txt
+#打包压缩日志文件
+logdir=$(date +%Y-%m-%d)
+mkdir ${logdir}
+find ./ -name '*.log' -mtime +0 -type f -exec cp -r {} ./${logdir} \;
+tar -jcf  ${logdir}.log.tar  ./${logdir}/*
+rm -rf ./${logdir}
+find ./ -name '*.log' -mtime +0 -type f -exec rm -rf {} \;

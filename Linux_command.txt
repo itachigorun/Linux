@@ -191,8 +191,8 @@ index.html: HTML document, ASCII text
 
 19.zip or unzip 
 .tar:
-    zip  :  tar zcvf filename.tar filename
-    unzip:  tar zxvf filename.tar
+    zip  :  tar cvf filename.tar filename
+    unzip:  tar xvf filename.tar
 .gz:
     zip  :  gzip filename
     unzip:  1. gunzip filename.gz 

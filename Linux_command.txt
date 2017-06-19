@@ -427,3 +427,9 @@ $ sudo iotop
 41. iostat --输入/输出统计
 iostat 是收集和展示系统输入和输出存储设备统计的简单工具。这个工具通常用于查找存储设备性能问题，包括设备、本地磁盘、例如 NFS 远程磁盘。
 $ iostat
+
+42. fuser --
+$ fuser -vm /tmp
+查找占用tmp目录的进程
+$ fuser -km /tmp 
+kills all processes accessing the file system /tmp in any way.

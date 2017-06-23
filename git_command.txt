@@ -1,0 +1,6 @@
+# itachigorun 
+# 2017-06-24
+
+1.使用Git时需要帮助
+$ git help
+$ git help config

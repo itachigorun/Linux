@@ -38,8 +38,10 @@ git add .                                                 # 增加当前子目�
 git commit -m 'edit log'                                  # 提交
 git commit --amend -m 'edit log'                          # 合并上一次提交（用于反复修改）
 git commit -am 'edit log'                                 # 将add和commit合为一步
-git rm file                                               # 删除index中的文件
+git rm file                                               # 删除index中的文件并在磁盘上也删除
 git rm -r *                                               # 递归删除
+git rm --cached file                                      # 删除文件但保留在磁盘上
+git rm log/\*.log                                         # 删除log文件夹下.log的所有文件
 git log                                                   # 显示提交日志
 git log -1                                                # 显示1行日志 -n为n行
 git log -5

@@ -69,7 +69,8 @@ git remote show origin                                    # 查看一个远程�
 git remote add origin git@github.com:itachigorun/Linux.git# 增加远程定义（用于push/pull/fetch）
 git remmote rename namea nameb                            # 重命名远程仓库
 git remote rm name                                        # 移除一个远程仓库
-git branch                                                # 显示本地分支
+git branch                                                # 显示本地分支列表
+git branch -v                                             # 查看每一个分支的最后一个提交
 git branch name                                           # 创建分支
 git branch --contains 50089                               # 显示包含提交50089的分支
 git branch -a                                             # 显示所有分支
@@ -79,6 +80,7 @@ git branch --no-merged                                    # 显示所有未合�
 git branch -m master master_copy                          # 本地分支改名
 git branch -d hotfixes/BJVEP933                           # 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）
 git branch -D hotfixes/BJVEP933                           # 强制删除分支hotfixes/BJVEP933
+git checkout master_copy                                  # 切换到另一个分支
 git checkout -b master_copy                               # 从当前分支创建新分支master_copy并检出
 git checkout -b master master_copy                        # 上面的完整版
 git checkout features/performance                         # 检出已存在的features/performance分支
@@ -97,7 +99,7 @@ git pull origin master                                    # 获取远程分支ma
 git mv README README2                                     # 重命名文件README为README2
 git reset HEAD file                                       # 取消暂存文件
 git reset --hard HEAD                                     # 将当前版本重置为HEAD（通常用于merge失败回退）
-git rebase
+git rebase                                                # 变基使代码记录更整洁
 git ls-files                                              # 列出git index包含的文件
 git show-branch                                           # 图示当前分支历史
 git show-branch --all                                     # 图示所有分支历史

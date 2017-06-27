@@ -77,6 +77,8 @@ git branch -r                                             # 显示所有原创�
 git branch --merged                                       # 显示所有已合并到当前分支的分支
 git branch --no-merged                                    # 显示所有未合并到当前分支的分支
 git branch -m master master_copy                          # 本地分支改名
+git branch -d hotfixes/BJVEP933                           # 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）
+git branch -D hotfixes/BJVEP933                           # 强制删除分支hotfixes/BJVEP933
 git checkout -b master_copy                               # 从当前分支创建新分支master_copy并检出
 git checkout -b master master_copy                        # 上面的完整版
 git checkout features/performance                         # 检出已存在的features/performance分支
@@ -96,8 +98,6 @@ git mv README README2                                     # 重命名文件READM
 git reset HEAD file                                       # 取消暂存文件
 git reset --hard HEAD                                     # 将当前版本重置为HEAD（通常用于merge失败回退）
 git rebase
-git branch -d hotfixes/BJVEP933                           # 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）
-git branch -D hotfixes/BJVEP933                           # 强制删除分支hotfixes/BJVEP933
 git ls-files                                              # 列出git index包含的文件
 git show-branch                                           # 图示当前分支历史
 git show-branch --all                                     # 图示所有分支历史

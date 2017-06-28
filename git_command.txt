@@ -57,9 +57,9 @@ git tag                                                   # 显示已存在的ta
 git tag -a v2.0 -m 'xxx'                                  # 增加v2.0的tag
 git show v2.0                                             # 显示v2.0的日志及详细内容
 git log v2.0                                              # 显示v2.0的日志
-git diff                                                  # 显示所有未添加至index的变更
-git diff --cached                                         # 显示所有已添加index但还未commit的变更
-git diff HEAD^                                            # 比较与上一个版本的差异
+git diff  branch/filename                                 # 显示所有未添加至index的变更,未add
+git diff --cached                                         # 显示所有已添加index但还未commit的变更，已经add未commit
+git diff HEAD                                             # 查看工作目录同最近一次commit的内容差异
 git diff HEAD -- ./lib                                    # 比较与HEAD版本lib目录的差异
 git diff origin/master..master                            # 比较远程分支master上有本地分支master上没有的
 git diff origin/master..master --stat                     # 只显示差异的文件，不显示具体内容
@@ -99,7 +99,7 @@ git pull origin master                                    # 获取远程分支ma
 git mv README README2                                     # 重命名文件README为README2
 git reset HEAD file                                       # 取消暂存文件
 git reset --hard HEAD                                     # 将当前版本重置为HEAD（通常用于merge失败回退）
-git rebase                                                # 变基使代码记录更整洁
+git rebase  master                                        # 变基使代码记录更整洁，将当前分支变基到master
 git ls-files                                              # 列出git index包含的文件
 git show-branch                                           # 图示当前分支历史
 git show-branch --all                                     # 图示所有分支历史
@@ -121,3 +121,8 @@ git grep "delete from"                                    # 文件中搜索文�
 git grep -e '#define' --and -e SORT_DIRENT
 git gc
 git fsck
+git reset	HEAD                                          # 提交层面,回退到之前的一次commit
+git reset	文件层面	将文件从缓存区中移除
+git checkout	提交层面	切换分支或查看旧版本
+git checkout	文件层面	舍弃工作目录中的更改
+git revert	提交层面	在公共分支上回滚更改

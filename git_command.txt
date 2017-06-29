@@ -34,7 +34,7 @@ git config --global --unset http.proxy                    # remove  proxy config
 git clone git@github.com:itachigorun/Linux.git newname    # clone远程仓库/重命名
 git status   -s/short                                     # 查看当前版本状态/简洁显示
 git add file/floder                                       # 添加文件/文件夹下的所有文件至index
-git add .                                                 # 增加当前子目录下所有更改过的文件至index
+git add .                                                 # 增加/当前子目录下所有更改过的文件至index
 git commit -m 'edit log'                                  # 提交
 git commit --amend -m 'edit log'                          # 合并上一次提交（用于反复修改）
 git commit -am 'edit log'                                 # 将add和commit合为一步
@@ -80,12 +80,14 @@ git branch --no-merged                                    # 显示所有未合�
 git branch -m master master_copy                          # 本地分支改名
 git branch -d hotfixes/BJVEP933                           # 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）
 git branch -D hotfixes/BJVEP933                           # 强制删除分支hotfixes/BJVEP933
-git checkout master_copy                                  # 切换到另一个分支
+git checkout HEAD                                         # 撤销所有修改，回到上一个commit
+git checkout HEAD^2                                       # 提交层面,回退两个版本，回退后这两个版本会被丢弃,会修改commit历史
+git checkout master_copy                                  # 切换到另一个分支,当前分支的缓存区,工作区信息会丢失
 git checkout -b master_copy                               # 从当前分支创建新分支master_copy并检出
 git checkout -b master master_copy                        # 上面的完整版
 git checkout features/performance                         # 检出已存在的features/performance分支
 git checkout --track hotfixes/BJVEP933                    # 检出远程分支hotfixes/BJVEP933并创建本地跟踪分支
-git checkout file                                         # 取消对文件的修改
+git checkout file                                         # 取消对文件的修改,修改工作区
 git checkout -b devel origin/develop                      # 从远程分支develop创建新本地分支devel并检出
 git checkout -- README                                    # 检出head版本的README文件（可用于修改错误回退）
 git merge origin/master                                   # 合并远程master分支至当前分支
@@ -97,14 +99,17 @@ git fetch                                                 # 获取所有远程�
 git fetch --prune                                         # 获取所有原创分支并清除服务器上已删掉的分支
 git pull origin master                                    # 获取远程分支master并merge到当前分支
 git mv README README2                                     # 重命名文件README为README2
-git reset HEAD file                                       # 取消暂存文件
-git reset --hard HEAD                                     # 将当前版本重置为HEAD（通常用于merge失败回退）
+git reset HEAD                                            # 重置为HEAD,撤销所有暂存区的文件到工作区
+git reset file                                            # 重置为HEAD,撤销暂存区的文件到工作区
+git reset HEAD^                                           # 重置为上一个版本，当前这个commit、暂存区会被遗弃,工作区不变
+git reset --hard HEAD                                     # 将当前版本重置为HEAD（通常用于merge失败回退）,重置暂存区和工作区
 git rebase  master                                        # 变基使代码记录更整洁，将当前分支变基到master
 git ls-files                                              # 列出git index包含的文件
 git show-branch                                           # 图示当前分支历史
 git show-branch --all                                     # 图示所有分支历史
 git whatchanged                                           # 显示提交历史对应的文件修改
 git revert dfb02e6e4f2f7b573337763e5c0013802e392818       # 撤销提交dfb02e6e4f2f7b573337763e5c0013802e392818
+git revert HEAD                                           # 撤销当前提交，然后需要重新commit,不修改commit历史
 git ls-tree HEAD                                          # 内部命令：显示某个git对象
 git rev-parse v2.0                                        # 内部命令：显示某个ref对于的SHA1 HASH
 git reflog                                                # 显示所有提交，包括孤立节点
@@ -121,8 +126,11 @@ git grep "delete from"                                    # 文件中搜索文�
 git grep -e '#define' --and -e SORT_DIRENT
 git gc
 git fsck
-git reset	HEAD                                          # 提交层面,回退到之前的一次commit
+git reset --mixed HEAD                                    # 回退到之前的一次commit,将当前的改动从缓存区中移除，但是这些改动还留在工作目录中
 git reset	文件层面	将文件从缓存区中移除
-git checkout	提交层面	切换分支或查看旧版本
+--soft – 缓存区和工作目录都不会被改变
+--mixed – 默认选项。缓存区和你指定的提交同步，但工作目录不受影响
+--hard – 缓存区和工作目录都同步到你指定的提交
+
 git checkout	文件层面	舍弃工作目录中的更改
 git revert	提交层面	在公共分支上回滚更改

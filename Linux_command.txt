@@ -433,3 +433,32 @@ $ fuser -vm /tmp
 查找占用tmp目录的进程
 $ fuser -km /tmp 
 kills all processes accessing the file system /tmp in any way.
+
+43. lscpu
+
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+座：                 1
+NUMA 节点：         1
+厂商 ID：           GenuineIntel
+CPU 系列：          6
+型号：              60
+型号名称：        Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz
+步进：              3
+CPU MHz：             3591.626
+BogoMIPS：            7183.52
+超管理器厂商：  VMware
+虚拟化类型：     完全
+L1d 缓存：          32K
+L1i 缓存：          32K
+L2 缓存：           256K
+L3 缓存：           8192K
+NUMA 节点0 CPU：    0
+
+44. 系统中处理器单元数量
+$ nproc

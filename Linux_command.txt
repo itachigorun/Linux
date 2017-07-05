@@ -462,3 +462,6 @@ NUMA 节点0 CPU：    0
 
 44. 系统中处理器单元数量
 $ nproc
+
+45. 查看当前环境下安装的python依赖包
+$ pip freeze

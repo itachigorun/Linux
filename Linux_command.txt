@@ -43,6 +43,10 @@ HugePages_Free:      0
 HugePages_Rsvd:      0
 Hugepagesize:     2048 kB
 
+$ grep MemTotal  /proc/meminfo 查看系统最大可用内存
+$ grep SwapTotal /proc/meminfo 查看系统swap情况
+$ rpm -qa | grep soft          查看软件包是否已经安装
+
 3. View the current shared memory page
 # ipcs -m
 ------ Shared Memory Segments --------
@@ -465,3 +469,7 @@ $ nproc
 
 45. 查看当前环境下安装的python依赖包
 $ pip freeze
+
+46. 查看用户的id
+$ id mysql 
+uid=27(mysql) gid=27(mysql) 组=27(mysql)

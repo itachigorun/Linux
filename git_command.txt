@@ -78,7 +78,7 @@ git branch -r                                             # 显示所有原创�
 git branch --merged                                       # 显示所有已合并到当前分支的分支
 git branch --no-merged                                    # 显示所有未合并到当前分支的分支
 git branch -m master master_copy                          # 本地分支改名
-git branch -d hotfixes/BJVEP933                           # 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）
+git branch -d hotfixes/BJVEP933                           # 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）,当前HEAD不能指向该分支
 git branch -D hotfixes/BJVEP933                           # 强制删除分支hotfixes/BJVEP933
 git checkout HEAD                                         # 撤销所有修改，回到上一个commit
 git checkout HEAD^2                                       # 提交层面,回退两个版本，回退后这两个版本会被丢弃,会修改commit历史

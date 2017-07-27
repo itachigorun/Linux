@@ -112,16 +112,18 @@ git revert dfb02e6e4f2f7b573337763e5c0013802e392818       # 撤销提交dfb02e6e
 git revert HEAD                                           # 撤销当前提交，然后需要重新commit,不修改commit历史
 git ls-tree HEAD                                          # 内部命令：显示某个git对象
 git rev-parse v2.0                                        # 内部命令：显示某个ref对于的SHA1 HASH
-git reflog                                                # 显示所有提交，包括孤立节点
+git reflog                                                # 显示所有提交，包括孤立节点,显示本地执行过的git命令
 git show HEAD@{5}
 git show master@{yesterday}                               # 显示master分支昨天的状态
 git log --pretty=format:'%h %s' --graph                   # 图示提交日志
-git show HEAD~3
+git show HEAD~e
 git show -s --pretty=raw 2be7fcb476
 git stash                                                 # 暂存当前修改，将所有至为HEAD状态
 git stash list                                            # 查看所有暂存
 git stash show -p stash@{0}                               # 参考第一次暂存
 git stash apply stash@{0}                                 # 应用第一次暂存
+git stash pop                                             # 回到最后一个stash的状态,病删除这个状态
+git stash clear                                           # 删除所有的stash
 git grep "delete from"                                    # 文件中搜索文本“delete from”
 git grep -e '#define' --and -e SORT_DIRENT
 git gc
@@ -133,3 +135,6 @@ git checkout	                                          # 提交层面	切换分�
 git checkout	                                          # 文件层面	舍弃工作目录中的更改
 git revert                                                # 提交层面	在公共分支上回滚更改
 git revert	                                              # 文件层面	（然而并没有）
+
+git blame <file-name>                                     # 查看行代码是谁写的
+git whatchanged --since='2 weeks ago'                     # 查看两个星期内的改动

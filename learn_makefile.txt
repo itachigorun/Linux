@@ -2,23 +2,23 @@ include<filelist.mk>    #类似于C语言的引用，可以加绝对路径
 
 #一个文件只应该有一个最终目标，第一个目标会成为最终目标
 #makefile支持"~"、"*"、"？"符号
-cc = gcc                #使用的编译器
-program = programname   #得到的程序名
-deps = filename.h       #需要用到的头文件，不加这个头文件改变，makefile无法得知
-objects = a.o b.o c.o d.o\        #目标文件
-		e.o f.o g.o              #换行必须tab缩进
-#deps = $(shell find ./ -name "*.h")   可以配置	函数
+cc = gcc                                   #使用的编译器
+program = programname                      #得到的程序名
+deps = filename.h                          #需要用到的头文件，不加这个头文件改变，makefile无法得知
+objects = a.o b.o c.o d.o\                 #目标文件
+		e.o f.o g.o                        #换行必须tab缩进
+#deps = $(shell find ./ -name "*.h")       #可以配置函数
 #src = $(shell find ./ -name "*.c")
-#objs = $(src:%.c=%.o)     $(src:%.c=%.o)是一个字符替换函数，它会将src所有的.c字串替换成.o，实际上就等于列出了所有.c文件要编译的结果
+#objs = $(src:%.c=%.o)                     # $(src:%.c=%.o)是一个字符替换函数，它会将src所有的.c字串替换成.o，实际上就等于列出了所有.c文件要编译的结果
 
-$(program) : $(objects)   #program称为目标，冒号后面的称为依赖关系，只要一个文件发生了改变，就会触发语句的第三部分
+$(program) : $(objects)                    #program称为目标，冒号后面的称为依赖关系，只要一个文件发生了改变，就会触发语句的第三部分
 	$(cc) -o $(program) $(objects)  
 	
-%.o : %.c $(deps)         #表示所有的.o文件都依赖于其同名的.c文件，还有头文件
-	$(cc) -c $< -o $@  # $< 代表的是依赖关系表中的第一项（如果我们想引用的是整个关系表，那么久应该使用$^,具体到我们这里就是%.c
-                           # 而$@代表的是当前语句的目标，即%.o   	
+%.o : %.c $(deps)                          #表示所有的.o文件都依赖于其同名的.c文件，还有头文件
+	$(cc) -c $< -o $@                      # $< 代表的是依赖关系表中的第一项（如果我们想引用的是整个关系表，那么久应该使用$^,具体到我们这里就是%.c
+                                           # 而$@代表的是当前语句的目标，即%.o   	
 
-#a.o: a.c a.h  当有.c文件不是包含所有头文件就用这个
+#a.o: a.c a.h                              #当有.c文件不是包含所有头文件就用这个
 #	$(cc) -c a.c
 
 

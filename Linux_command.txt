@@ -473,3 +473,6 @@ $ pip freeze
 46. 查看用户的id
 $ id mysql 
 uid=27(mysql) gid=27(mysql) 组=27(mysql)
+
+47. 列出文件的ASCII文本，不区分二进制文件还是ASCII文件
+$ strings file | head -10

@@ -1,0 +1,88 @@
+
+git push origin --delete dev
+选择一个commit,合并到当前分支
+
+git cherry-pick f0299e2
+合并分支rebase和merge
+
+####在工作中，如果团队开发同一个项目的人数特别多的时候，每个人都在自己的分支上开发
+在开发过程中，为了使提交记录直观，方便在一条分支上查看提交记录，可以对分支进行衍合，一般是在做了一些小的修改之后会用它
+将修改commit到本地分支上之后
+当本地分支上有相对应的远程分支，可以直接使用
+
+git rebase
+为了方便讲解，origin/dev_homepageFix这个远程分支是随便写的分支名
+当这次commit要衍合到dev_homepageFix分支上时
+
+git rebase origin/dev_homepageFix
+最后就可以push跟远程仓库同步了 ####当我们到项目接近尾声的时候，需要将各自的分支都合并到dev分支上去
+先抓取最新仓库更新
+
+git fetch
+然后切到dev分支上
+
+git checkout dev
+再分别合并各个分支，这里以dev_homepageFix分支为例
+
+git merge origin/dev_homepageFix
+撤销操作
+
+当我们想去整理我的提交，或者是把不该这次提交的修改提交了，我们可以对修改进行撤销，或者对提交进行撤销
+
+恢复暂存区的所有文件到工作区
+
+git reset HEAD
+恢复暂存区的指定的某个文件到工作区
+
+git reset HEAD README.md
+我们做了一些修改，然后觉得自己做错了，不想提交
+
+可以重置暂存区、工作区，这样就能与上次提交保持一致，建议不要轻易这么做！
+
+git reset --hard
+当我们想重新整理提交的时候，比如说将上两次的提交整理到一次提交,我们可以重置到上两次的上次提交commit
+
+可以重置到指定的commit,并重置了暂存区，但工作区是不变的
+
+git reset 2126dce
+这种情况也会引发另外一个问题，当我们本地仓库与远程仓库一致的时候，然后我们重置，就需要用到push的force来进行强推，这是我们不想操作的，后续我会讲解一下强推的小建议！
+
+新建一个commit，用来撤销指定commit，后者所有变化都会被前者抵消，并应用到当前分支 
+我们也是不要轻易这么去做！
+
+git revert 2126dce
+##起别名 当我们有比较常用的命令行用的比较频繁，但是我们又觉得完整把它们敲出来费事 #####可以在 ~/.gitconfig 文件里面进行设置别名,添加alias
+
+[alias]
+ft = fetch
+ck = checkout
+st = status
+br = branch
+rb = rebase
+lg = log
+然后试一下git st就管用了！
+
+##标签的相关操作 标签可以针对某一时间点的版本做标记，常用于版本发布 #####列出标签
+
+git tag
+#####创建附注标签
+
+git tag -a v0.0.1-pro -m "pro发版"
+#####切换到标签
+
+git checkout v0.0.1-pro
+#####查看标签的版本信息
+
+git show v0.0.1-pro
+#####删除标签
+
+git tag -d v0.0.1-pro
+#####给指定的commit打标签
+
+git tag -a v0.0.1-pro 9fbc3dd
+#####将v0.0.1-pro标签提交到git服务器
+
+git push origin v0.0.1-pro
+#####将本地所有标签一次性提交到git服务器
+
+git push origin –tags

@@ -327,6 +327,16 @@ Where 7459 is lines, 15915 is words and 398400 is characters.
 list file's number
 $ls | wc -w 
 
+-c 统计字节数。 
+-l 统计行数。 
+-m 统计字符数。这个标志不能与 -c 标志一起使用。 
+-w 统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。 
+-L 打印最长行的长度。 
+-help 显示帮助信息 
+–version 显示版本信息
+只显示文件夹 ls -l | grep ^d
+只显示文件 ls -l | grep ^-
+
 30. cal 
 Shows the month's calendar.
 accdev@acc:/app/accdev>cal
@@ -507,3 +517,42 @@ MemTotal: 32941268 kB //内存32G
 # fdisk -l | grep Disk
 Disk /dev/cciss/c0d0: 146.7 GB, 146778685440 bytes
 总结：硬盘大小146.7G，即厂商标称的160G
+
+shell 中！叫做事件提示符，英文是：Event Designators,可以方便的引用历史命令， 也就是history中记录的命令
+
+用法
+! 当后面跟随的字母不是“空格、换行、回车、=和(”时，做命令替换
+!n 会引用history中的第n个命令，比如输入！100，就是执行history列表中的第100条命令
+# history | grep echo
+1013  2012-12-20 12:24:40 echo ""
+1014  2012-12-20 12:24:45  echo "22"
+# !1014
+echo "22"
+22
+
+
+
+!-n 获取history中倒数第N个命令并执行，比如输入!-1,就会执行上一条命令
+# !-1
+echo "22"
+22
+
+
+!!是!-1的一个alias ，因为执行上一条命令的情况比较多一些，一般如果只是执行上一条命令只按下键盘中的↑即可，有时候如果命令前加点东西执行起来会快一点（当然↑然后ctrl+a也可以跳到命令最面前插入内容）
+# apt-get install xxx    //Permission Denied. You need to be sudo to do this!
+# sudo !!                // This is equivalent to sudo apt-get install xxx
+
+!string引用最近的以 string 开始的命令。这条命令在你运行一个命令之后忘记了这个命令的参数是什么，直接!命令既可
+# echo "123" "213" "33"
+123 213 33
+# !echo
+echo "123" "213" "33"
+123 213 33
+
+!?string[?] 指向包含这个字符串的命令
+# !?123
+echo "123" "213" "33"
+123 213 33
+
+!!表示上一条输入的命令
+!$表示上一条命令最后一个parameter

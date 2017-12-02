@@ -38,7 +38,6 @@ $@ 传递给脚本或函数的所有参数
 $? 上个命令的退出状态，或函数的返回值
 $$ 当前shell进程ID，对于shell脚本，就是这些脚本所在的进程ID
 
-<<<<<<< HEAD
 #读取终端输入信息
 read PERSON
 
@@ -136,6 +135,4 @@ length=${#array_name[@]}
 length=${#array_name[*]}
 # 取得数组单个元素的长度
 lengthn=${#array_name[n]}
-=======
 
->>>>>>> c9909f752b862250e4c7e38c124f564ba4449856

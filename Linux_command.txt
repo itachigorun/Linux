@@ -576,3 +576,6 @@ uptime命令能够打印系统总共运行了多长时间和系统的平均负�
 
 split -b 100m CommCon.2601.1.log 		(按100M一个文件分隔)
 split -l 100000 CommCon.2601.1.log		(按照十万行一个文件分隔)
+
+查询占用端口号的程序
+sudo lsof -i:端口号  

@@ -137,3 +137,22 @@ git revert                                                # 提交层面	在公�
 git revert	                                              # 文件层面	（然而并没有）
 git blame <file-name>                                     # 查看行代码是谁写的
 git whatchanged --since='2 weeks ago'                     # 查看两个星期内的改动
+
+
+git add -A  提交所有变化
+git add -u  提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+git add .  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
+
+如何将本地新建仓库上传到github
+1.github中新建仓库
+2.本地仓库：
+git init
+git add -A
+git commit -m '提交的说明注释'
+git commit只是提交到本地的仓库，远程仓库并无影响
+3.添加远程地址：
+git remote add origin git@github.com:itachigorun/test.git
+4.将github仓库里到文件拉下来(readme文件)
+git pull origin master 
+5.上传仓库
+git push origin master

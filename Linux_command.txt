@@ -531,7 +531,7 @@ IBM,0206*****
 #prtconf -c
 CPU Type: 64-bit
 
-
+49.
 shell 中！叫做事件提示符，英文是：Event Designators,可以方便的引用历史命令， 也就是history中记录的命令
 
 用法
@@ -578,4 +578,19 @@ split -b 100m CommCon.2601.1.log 		(按100M一个文件分隔)
 split -l 100000 CommCon.2601.1.log		(按照十万行一个文件分隔)
 
 查询占用端口号的程序
-sudo lsof -i:端口号  
+sudo lsof -i:端口号 
+
+50.查看系统运行时间
+date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S" 
+
+cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_minute=($1 % 3600)/60;run_second=$1 % 60;printf("系统已运行：%d天%d时%d分%d秒",run_days,run_hour,run_minute,run_second)}'
+
+who -b 查看最后一次系统启动的时间。
+[root@localhost ~]# who -b
+system boot  2017-10-27 14:32
+
+who -r 查看当前系统运行时间
+[root@localhost ~]# who -r
+run-level 3  2017-10-27 14:33
+
+last reboot可以看到Linux系统历史启动的时间

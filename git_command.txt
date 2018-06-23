@@ -155,11 +155,12 @@ git init
 git add -A
 git commit -m '提交的说明注释'
 git commit只是提交到本地的仓库，远程仓库并无影响
-3.添加远程地址：
+3.github上创建repo
+4.添加远程地址：
 git remote add origin git@github.com:itachigorun/test.git
-4.将github仓库里到文件拉下来(readme文件)
+5.将github仓库里到文件拉下来(readme文件)
 git pull origin master 
-5.上传仓库
+6.上传仓库
 git push origin master
 
 

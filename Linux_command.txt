@@ -594,3 +594,6 @@ who -r 查看当前系统运行时间
 run-level 3  2017-10-27 14:33
 
 last reboot可以看到Linux系统历史启动的时间
+
+51.不用ip linux传输文件
+# scp file.name root@1.2.3.4:/home/java/

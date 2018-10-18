@@ -597,3 +597,9 @@ last reboot可以看到Linux系统历史启动的时间
 
 51.不用ip linux传输文件
 # scp file.name root@1.2.3.4:/home/java/
+
+52.查看网络速度
+# iftop
+
+53.查看io速度
+# iotop

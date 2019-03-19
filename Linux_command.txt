@@ -603,3 +603,9 @@ last reboot可以看到Linux系统历史启动的时间
 
 53.查看io速度
 # iotop
+
+54.查看连接你服务器 top10 用户端的 IP 地址：
+netstat -nat | awk '{print $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10
+
+55.查看一下你最常用的10个命令：
+cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10

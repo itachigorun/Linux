@@ -609,3 +609,7 @@ netstat -nat | awk '{print $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sor
 
 55.查看一下你最常用的10个命令：
 cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10
+
+56.根据文件大小排序，从大到小  从小到大
+ls -slr -h    
+ls -Slr -h

@@ -613,3 +613,27 @@ cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | s
 56.根据文件大小排序，从大到小  从小到大
 ls -slr -h    
 ls -Slr -h
+
+57.查看磁盘io性能
+top命令中的 wa% 判断io性能
+
+sar -d -p 1 2 
+-d 代表查看磁盘性能  -p 代表将dev设备按照sda sdb名称显示 1 代表每隔1s采取一次数值 2代表总共采取2次数值
+08时50分35秒       DEV       tps  rd_sec/s  wr_sec/s  avgrq-sz  avgqu-sz     await     svctm     %util
+08时50分36秒       sda      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+08时50分36秒 centos-root      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+08时50分36秒 centos-swap      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+08时50分36秒 centos-home      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+await:平均每次设备i/o操作的等待时间（毫秒）
+svctm：平均每次设备i/o操作的服务时间（毫秒）
+%util：一秒中有百分之几的时间用于i/o操作
+
+iostat -dxk 1 2 
+
+vmstat 2
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  0 177920 126016   2064 7278364    0    0     2    27    0    4  1  1 97  2  0
+ 0  0 177920 139272   2064 7264972    0    2     0 65564 6505 15808  0  2 74 23  0
+bi 块设备每秒接收的块数量，这里的块设备是指系统上所有的磁盘和其他块设备，默认块大小是1024bytes
+bo 块设备每秒发送的块数量

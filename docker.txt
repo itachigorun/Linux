@@ -33,3 +33,6 @@ docker  run相当于执行了docker  create  然后 docker  start
 
 11.docker exec -it containerID /bin/bash
 docker进入启动的容器
+
+12. docker inspect --format='{{.NetworkSettings.IPAddress}}' ubuntu
+获取容器ip

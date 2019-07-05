@@ -36,3 +36,6 @@ docker进入启动的容器
 
 12. docker inspect --format='{{.NetworkSettings.IPAddress}}' ubuntu
 获取容器ip
+
+13. docker启动db2容器
+docker run -it --network=host -p50000:50000 -e DB2INST1_PASSWORD=db2inst1-pwd -e LICENSE=accept -v /localpath:/dockerdatapath ibmcom/db2express-c:latest bash
